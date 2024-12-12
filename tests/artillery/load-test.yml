@@ -1,0 +1,20 @@
+config:
+  target: 'http://localhost:9098'  # L'URL du serveur Socket.IO
+  phases:
+    - duration: 60
+      arrivalRate: 75  # Le nombre de nouveaux utilisateurs (VUs) par seconde
+  engines:
+    socketio:  # Spécifie que tu utilises Socket.IO
+      transport: "websocket"  # Force l'utilisation de WebSocket
+      connectTimeout: 10000  # Timeout pour la connexion
+
+scenarios:
+  - engine: "socketio"
+    flow:
+      - emit:
+          channel: "message"
+          data: 'Hello World!'
+        response:
+          channel: 'privateChatMessage'
+          data: 'Hello World!'
+
