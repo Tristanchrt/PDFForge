@@ -31,13 +31,16 @@ export class SocketCitiesResource
 
     this.logger.log(`Client id: ${client.id} connected`);
     this.logger.debug(`Number of connected clients: ${sockets.size}`);
-
-    const city = this.citiesApplicationService.getAvailableCity();
-    client.emit('myCity', city);
   }
 
   handleDisconnect(client: any) {
     this.logger.log(`Cliend id:${client.id} disconnected`);
+  }
+
+  @SubscribeMessage('getCities')
+  getCities(client: any) {
+    const cities = this.citiesApplicationService.getCities();
+    client.emit('getCities', cities);
   }
 
   @SubscribeMessage('message')

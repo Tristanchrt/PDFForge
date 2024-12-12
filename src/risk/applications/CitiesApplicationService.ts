@@ -13,4 +13,8 @@ export class CitiesApplicationService {
   getAvailableCity(): City {
     return this.dbCitiesRepository.getAvailableCity();
   }
+
+  getCities() {
+    return this.dbCitiesRepository.getCities();
+  }
 }

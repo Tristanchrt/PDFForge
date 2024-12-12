@@ -21,7 +21,7 @@ export class WebSocketTestHelper {
     }
   }
 
-  emit(event: string, data: any) {
+  emit(event: string, data: any = null) {
     this.clientSocket.emit(event, data);
   }
 

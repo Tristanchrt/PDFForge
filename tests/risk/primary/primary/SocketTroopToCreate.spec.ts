@@ -1,7 +1,7 @@
 import { describe } from 'node:test';
-import { SocketTroopToCreate } from '../../../src/risk/infrastructure/primary/SocketTroopToCreate';
-import { TroopType } from '../../../src/risk/domain/TroopType';
-import { Coordinates } from '../../../src/risk/domain/Coordinates';
+import { SocketTroopToCreate } from '../../../../src/risk/infrastructure/primary/SocketTroopToCreate';
+import { TroopType } from '../../../../src/risk/domain/TroopType';
+import { Coordinates } from '../../../../src/risk/domain/Coordinates';
 
 describe('SocketTroopToCreate', () => {
   const type = TroopType.SOLDIER;
