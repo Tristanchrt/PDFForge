@@ -2,11 +2,13 @@ import { CitiesRepository } from '../../domain/CitiesRepository';
 import { City } from '../../domain/City';
 import { CITIES_DATA } from './Cities.data';
 import { Coordinates } from '../../domain/Coordinates';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class DBCitiesRepository implements CitiesRepository {
   constructor() {}
 
-  async getCities(): Promise<City[]> {
+  getCities(): City[] {
     return CITIES_DATA.map(
       (city) =>
         new City(
@@ -18,19 +20,12 @@ export class DBCitiesRepository implements CitiesRepository {
   }
 
   // TODO
-  async getMeCity(): Promise<City> {
-    const city = (await this.getCities()).find(
-      (city) => city.getName() === 'Lyon',
-    ) as City;
-    return new City(
-      city.getName(),
-      new Coordinates(city.getCoords().getLat(), city.getCoords().getLon()),
-      city.getColor(),
-    );
+  getMeCity(): City {
+    return null;
   }
 
   // TODO
-  getAvailable(): Promise<City> {
-    return Promise.resolve(undefined);
+  getAvailableCity(): City {
+    return CITIES_DATA.find((city) => city.name === 'Lyon') as unknown as City;
   }
 }

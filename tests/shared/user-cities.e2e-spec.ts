@@ -32,6 +32,19 @@ describe('ChatGateway (e2e)', () => {
     await app.close();
   });
 
+  const MY_CITY = {
+    name: 'Lyon',
+    coords: [45.764, 4.8357],
+    color: 'green',
+  };
+
+  it('should get an available city on connection', (done) => {
+    wsHelper.on('myCity', (cities) => {
+      expect(cities).toEqual(MY_CITY);
+      done();
+    });
+  });
+
   it('should handle "message" events', (done) => {
     const testMessage = { text: 'Hello, World!' };
 

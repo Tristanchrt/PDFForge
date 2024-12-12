@@ -8,12 +8,17 @@ import {
 } from '@nestjs/websockets';
 import { Logger } from '@nestjs/common';
 import { Server } from 'socket.io';
+import { CitiesApplicationService } from '../../applications/CitiesApplicationService';
 
 @WebSocketGateway()
-export class ChatGateway
+export class SocketCitiesResource
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
 {
-  private readonly logger = new Logger(ChatGateway.name);
+  private readonly logger = new Logger(SocketCitiesResource.name);
+
+  constructor(
+    private readonly citiesApplicationService: CitiesApplicationService,
+  ) {}
 
   @WebSocketServer() io: Server;
 
@@ -26,6 +31,9 @@ export class ChatGateway
 
     this.logger.log(`Client id: ${client.id} connected`);
     this.logger.debug(`Number of connected clients: ${sockets.size}`);
+
+    const city = this.citiesApplicationService.getAvailableCity();
+    client.emit('myCity', city);
   }
 
   handleDisconnect(client: any) {
