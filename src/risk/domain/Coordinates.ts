@@ -4,8 +4,8 @@ export class Coordinates {
     private readonly lon: number,
   ) {}
 
-  value(): number[] {
-    return [this.lat, this.lon];
+  value(): { lat: number; lon: number } {
+    return { lat: this.lat, lon: this.lon };
   }
 
   getLat(): number {

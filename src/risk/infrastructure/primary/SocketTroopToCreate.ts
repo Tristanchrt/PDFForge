@@ -5,6 +5,7 @@ import {
   SocketTroopType,
   toDomainTroopType,
 } from './SocketTroopType';
+import { Troop } from '../../domain/Troop';
 
 export class SocketTroopToCreate {
   constructor(
@@ -12,10 +13,10 @@ export class SocketTroopToCreate {
     private readonly type: SocketTroopType,
   ) {}
 
-  static from(coordinates: { x: number; y: number }, soldier: string) {
+  static from(troop: Troop) {
     return new SocketTroopToCreate(
-      SocketCoordinates.from(coordinates.x, coordinates.y),
-      fromSocketTroopType(soldier),
+      SocketCoordinates.from(troop.getCoords()),
+      fromSocketTroopType(troop.getType()),
     );
   }
 
