@@ -1,13 +1,13 @@
 import { Coordinates } from '../../domain/Coordinates';
 
-export class SocketCoordinates {
+export class RestCoordinates {
   constructor(
     private readonly lat: number,
     private readonly lon: number,
   ) {}
 
-  static from(coords: Coordinates): SocketCoordinates {
-    return new SocketCoordinates(coords.getLat(), coords.getLon());
+  static from(coords: Coordinates): RestCoordinates {
+    return new RestCoordinates(coords.getLat(), coords.getLon());
   }
 
   toDomain(): Coordinates {

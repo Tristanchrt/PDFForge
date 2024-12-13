@@ -1,11 +1,11 @@
-import { SocketCoordinates } from './SocketCoordinates';
+import { RestCoordinates } from './RestCoordinates';
 import { City } from '../../domain/City';
 
 export class SocketCity {
   constructor(
     private readonly name: string,
     private readonly color: string,
-    private readonly coordinates: SocketCoordinates,
+    private readonly coordinates: RestCoordinates,
   ) {}
 
   static from(
@@ -14,7 +14,7 @@ export class SocketCity {
     return new SocketCity(
       city.getName(),
       city.getColor(),
-      SocketCoordinates.from(city.getCoords()),
+      RestCoordinates.from(city.getCoords()),
     );
   }
 
