@@ -3,10 +3,12 @@ import { City } from '../../domain/City';
 import { CITIES_DATA } from './Cities.data';
 import { Coordinates } from '../../domain/Coordinates';
 import { Injectable } from '@nestjs/common';
+import { UUID } from 'node:crypto';
 
 @Injectable()
 export class DBCitiesRepository implements CitiesRepository {
-  constructor() {}
+  private readonly availableCities: Set<City> = new Set<City>();
+  private readonly cityUser: Map<UUID, City> = new Map();
 
   getCities(): City[] {
     return CITIES_DATA.map(

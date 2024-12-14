@@ -1,7 +1,13 @@
 import { CitiesApplicationService } from '../../applications/CitiesApplicationService';
 import { Module } from '@nestjs/common';
 import { DBCitiesRepository } from '../secondary/DBCitiesRepository';
-import { CITIES_REPOSITORY } from '../../applications/Symbol';
+import {
+  CITIES_REPOSITORY,
+  TROOPS_REPOSITORY,
+} from '../../applications/Symbol';
+import { RestTroopsResource } from './RestTroopsResource';
+import { TroopsApplicationService } from '../../applications/TroopsApplicationService';
+import { DBTroopsRepository } from '../secondary/DBTroopsRepository';
 
 @Module({
   providers: [
@@ -10,7 +16,13 @@ import { CITIES_REPOSITORY } from '../../applications/Symbol';
       provide: CITIES_REPOSITORY,
       useClass: DBCitiesRepository,
     },
+    TroopsApplicationService,
+    {
+      provide: TROOPS_REPOSITORY,
+      useClass: DBTroopsRepository,
+    },
   ],
-  exports: [CitiesApplicationService],
+  exports: [CitiesApplicationService, TroopsApplicationService],
+  controllers: [RestTroopsResource],
 })
 export class CitiesModule {}

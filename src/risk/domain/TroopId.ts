@@ -1,13 +1,13 @@
 import { randomUUID, UUID } from 'node:crypto';
 
-export class UserId {
+export class TroopId {
   constructor(private readonly value: UUID) {}
 
-  static newValue(): UserId {
-    return new UserId(randomUUID());
+  static newId(): TroopId {
+    return new TroopId(randomUUID());
   }
 
-  getValue() {
+  getValue(): UUID {
     return this.value;
   }
 }

@@ -11,6 +11,12 @@ describe('TroopToCreate', () => {
   it('should create a troop', () => {
     const troopToCreate = new TroopToCreate(coords, type, user);
     const troop = troopToCreate.toCreate();
-    expect(troop).toEqual({ coords, type, user });
+    expect(troop).toEqual(
+      expect.objectContaining({
+        coords,
+        type,
+        user,
+      }),
+    );
   });
 });

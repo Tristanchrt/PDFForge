@@ -34,29 +34,11 @@ export class RestTroopToCreate {
     this.type = type;
   }
 
-  toDomain(user: UserId): TroopToCreate {
+  public toDomain(user: UserId): TroopToCreate {
     return new TroopToCreate(
       this.coordinates.toDomain(),
       toDomainTroopType(this.type),
       user,
     );
-  }
-
-  @ApiProperty({
-    description: 'X and Y coordinates',
-    required: true,
-    type: () => RestCoordinates,
-  })
-  public getCoordinates(): RestCoordinates {
-    return this.coordinates;
-  }
-
-  @ApiProperty({
-    description: 'The type of troop',
-    enum: RestTroopType,
-    required: true,
-  })
-  public getType(): RestTroopType {
-    return this.type;
   }
 }

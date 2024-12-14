@@ -2,6 +2,7 @@ import { TroopType } from './TroopType';
 import { Troop } from './Troop';
 import { Coordinates } from './Coordinates';
 import { UserId } from './UserId';
+import { TroopId } from './TroopId';
 
 export class TroopToCreate {
   constructor(
@@ -11,7 +12,7 @@ export class TroopToCreate {
   ) {}
 
   toCreate(): Troop {
-    return new Troop(this.coords, this.type, this.user);
+    return new Troop(TroopId.newId(), this.coords, this.type, this.user);
   }
 
   getCoords(): Coordinates {
