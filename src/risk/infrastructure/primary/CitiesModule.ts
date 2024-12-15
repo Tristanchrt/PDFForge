@@ -8,6 +8,7 @@ import {
 import { RestTroopsResource } from './RestTroopsResource';
 import { TroopsApplicationService } from '../../applications/TroopsApplicationService';
 import { DBTroopsRepository } from '../secondary/DBTroopsRepository';
+import { RestCitiesResource } from './RestCitiesResource';
 
 @Module({
   providers: [
@@ -23,6 +24,6 @@ import { DBTroopsRepository } from '../secondary/DBTroopsRepository';
     },
   ],
   exports: [CitiesApplicationService, TroopsApplicationService],
-  controllers: [RestTroopsResource],
+  controllers: [RestTroopsResource, RestCitiesResource],
 })
 export class CitiesModule {}
