@@ -11,6 +11,10 @@ export class Troop {
     private readonly user: UserId,
   ) {}
 
+  move(coords: Coordinates): Troop {
+    return new Troop(this.id, coords, this.type, this.user);
+  }
+
   getId(): TroopId {
     return this.id;
   }

@@ -3,6 +3,7 @@ import { Troop } from '../../domain/Troop';
 import { UserId } from '../../domain/UserId';
 import { Injectable } from '@nestjs/common';
 import { UUID } from 'node:crypto';
+import { TroopId } from '../../domain/TroopId';
 
 @Injectable()
 export class DBTroopsRepository implements TroopsRepository {
@@ -14,10 +15,29 @@ export class DBTroopsRepository implements TroopsRepository {
       this.troopStore.set(userId, []);
     }
     const userTroops = this.troopStore.get(userId);
+    if (
+      userTroops.find((t) => t.getId().getValue() === troop.getId().getValue())
+    ) {
+      this.troopStore.set(
+        userId,
+        userTroops.map((t) =>
+          t.getId().getValue() === troop.getId().getValue() ? troop : t,
+        ),
+      );
+      return;
+    }
     userTroops!.push(troop);
   }
 
   async findByUser(userId: UserId): Promise<Troop[]> {
     return this.troopStore.get(userId.getValue()) || [];
+  }
+
+  // TODO handle with optional
+  async findById(userId: UserId, troopId: TroopId): Promise<Troop> {
+    const userTroops = this.troopStore.get(userId.getValue());
+    return userTroops.find(
+      (troop) => troop.getId().getValue() === troopId.getValue(),
+    );
   }
 }

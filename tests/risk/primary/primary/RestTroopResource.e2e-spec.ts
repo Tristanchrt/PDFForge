@@ -2,7 +2,6 @@ import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppModule } from '../../../../src/app.module';
 import * as request from 'supertest';
-import { IS_UUID } from 'class-validator';
 
 describe('Rest Troop resource', () => {
   let app: INestApplication;
@@ -44,5 +43,35 @@ describe('Rest Troop resource', () => {
     expect(getResponse.body).toEqual(
       expect.arrayContaining([expect.objectContaining(troopPayload)]),
     );
+  });
+
+  it('should move troop to a new location', async () => {
+    // Given: a user with id 2 and a troop
+    const userId = 2;
+    const troopPayload = {
+      type: 'SOLDIER',
+      coordinates: { lat: 1, lon: 2 },
+    };
+
+    const createResponse = await request(app.getHttpServer())
+      .post(`/api/v1/users/${userId}/troops`)
+      .send(troopPayload)
+      .expect(201);
+
+    const troopId = createResponse.body.id;
+
+    // When: I move the troop to a new location
+    const moveResponse = await request(app.getHttpServer())
+      .put(`/api/v1/users/${userId}/troops/${troopId}/move`)
+      .send({ lat: 3, lon: 4 })
+      .expect(200);
+
+    expect(moveResponse.body).toEqual({
+      id: troopId,
+      coordinates: { lat: 3, lon: 4 },
+      type: 'SOLDIER',
+    });
+
+    // TODO add socket handling
   });
 });
