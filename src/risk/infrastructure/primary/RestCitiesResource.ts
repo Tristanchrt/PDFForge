@@ -1,23 +1,34 @@
 import { Controller, Get } from '@nestjs/common';
 import { CitiesApplicationService } from '../../applications/CitiesApplicationService';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
-import { SocketCities } from './SocketCities';
+import { RestCities } from './RestCities';
+import { RestCity } from './RestCity';
 
 @ApiTags('Cities')
-@Controller('api/v1/cities/')
+@Controller('api/v1/')
 export class RestCitiesResource {
   constructor(
     private readonly citiesApplicationService: CitiesApplicationService,
   ) {}
 
-  @Get('available')
+  @Get('cities/available')
   @ApiResponse({
     status: 200,
     description: 'Return the cities',
-    type: SocketCities,
+    type: RestCities,
     isArray: true,
   })
-  getCities(): SocketCities {
-    return SocketCities.from(this.citiesApplicationService.getCities());
+  getCities(): RestCities {
+    return RestCities.from(this.citiesApplicationService.getCities());
+  }
+
+  @Get('users/:userId/cities/me')
+  @ApiResponse({
+    status: 200,
+    description: 'Return the city of the user',
+    type: RestCities,
+  })
+  getCity(): RestCity {
+    return RestCity.from(this.citiesApplicationService.getMeCity());
   }
 }

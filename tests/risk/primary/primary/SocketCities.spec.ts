@@ -1,6 +1,6 @@
 import { describe } from 'node:test';
 import { Coordinates } from '../../../../src/risk/domain/Coordinates';
-import { SocketCities } from '../../../../src/risk/infrastructure/primary/SocketCities';
+import { RestCities } from '../../../../src/risk/infrastructure/primary/RestCities';
 import { City } from '../../../../src/risk/domain/City';
 
 describe('SocketCities', () => {
@@ -9,7 +9,7 @@ describe('SocketCities', () => {
   const paris = new City('Paris', coords, 'blue');
 
   it('should transform from and to domain', () => {
-    const socketCities = SocketCities.from([lyon, paris]);
+    const socketCities = RestCities.from([lyon, paris]);
     const city = socketCities.toDomain();
     expect(city).toEqual([
       { coordinates: coords, name: 'Lyon', color: 'green' },

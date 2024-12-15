@@ -21,9 +21,8 @@ export class DBCitiesRepository implements CitiesRepository {
     );
   }
 
-  // TODO
   getMeCity(): City {
-    return null;
+    return this.getCities().find((city) => city.getName() === 'Lyon') as City;
   }
 
   // TODO

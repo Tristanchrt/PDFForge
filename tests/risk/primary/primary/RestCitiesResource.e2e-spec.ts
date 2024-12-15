@@ -23,4 +23,20 @@ describe('Rest Cities resource', () => {
     // TODO
     expect(response.body.cities.length).toEqual(29);
   });
+
+  it('should get my city', async () => {
+    // Given: a user with id 2 with Lyon as city
+    const userId = 2;
+    const response = await request(app.getHttpServer())
+      .get(`/api/v1/users/${userId}/cities/me`)
+      .expect(200);
+
+    expect(response.body).toEqual(
+      expect.objectContaining({
+        name: 'Lyon',
+        color: 'green',
+        coordinates: { lat: 45.764, lon: 4.8357 },
+      }),
+    );
+  });
 });
