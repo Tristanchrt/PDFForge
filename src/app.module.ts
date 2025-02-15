@@ -3,9 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SocketCitiesResource } from './risk/infrastructure/primary/SocketCitiesResource';
 import { CitiesModule } from './risk/infrastructure/primary/CitiesModule';
+import { TemplateFileModule } from './templateFile/infrastructure/primary/TemplateFileModule';
 
 @Module({
-  imports: [CitiesModule],
+  imports: [CitiesModule, TemplateFileModule],
   controllers: [AppController],
   providers: [AppService, SocketCitiesResource],
 })
