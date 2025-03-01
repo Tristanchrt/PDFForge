@@ -1,7 +1,15 @@
-import { Body, Controller, Get, HttpStatus, Post, Res, StreamableFile, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Post,
+  Res,
+  StreamableFile,
+  ValidationPipe,
+} from '@nestjs/common';
 import { ApiProduces, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { PdfService } from './PdfService';
-import { RestPDFGenerated } from './RestPDFGenerated';
 import { RestPdfToGenerate } from './RestPdfToGenerate';
 import { Readable } from 'node:stream';
 

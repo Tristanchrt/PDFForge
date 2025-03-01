@@ -1,24 +1,20 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { AppService } from './app.service';
 import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Risk wars API')
-    .setDescription('This is the API for the Risk wars game')
+    .setTitle('API PDF Generator from template')
+    .setDescription('This is an API for generating PDF from template')
     .setVersion('1.0')
-    .addTag('Troops')
-    .addTag('Cities')
-    .addTag('User')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);
 
-  const logger = new Logger(AppService.name);
+  const logger = new Logger();
 
   logger.log('Listening on port ' + (process.env.PORT ?? 9098));
 
