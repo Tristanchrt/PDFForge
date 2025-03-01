@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, IsObject, IsOptional } from 'class-validator';
 import { RestPdfOptions } from './RestPdfOptions';
+import { Type } from 'class-transformer';
 
 export class RestPdfToGenerate {
   @ApiProperty({
@@ -29,5 +30,6 @@ export class RestPdfToGenerate {
   })
   @IsOptional()
   @IsObject()
+  @Type(() => RestPdfOptions)
   options?: RestPdfOptions;
 }
