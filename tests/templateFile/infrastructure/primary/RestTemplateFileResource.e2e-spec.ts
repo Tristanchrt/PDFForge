@@ -20,6 +20,33 @@ describe('RestTemplateFileResource', () => {
       .get(`/api/v1/test`)
       .expect(200);
 
-    expect(response).toEqual('Hello World!');
+    expect(response.text).toEqual('Hello World!');
+  });
+
+  it('should generate a pdf file from template', async () => {
+    const body = {
+      template: '<html><body><h1>Mon Rapport {{title}}</h1></body></html>',
+      variables: {
+        title: 'Rapport 2024',
+        name: 'Jean Dupont',
+      },
+      options: {
+        format: 'A4',
+        margin: {
+          top: '10mm',
+          bottom: '10mm',
+          left: '10mm',
+          right: '10mm',
+        },
+      },
+    };
+    const response = await request(app.getHttpServer())
+      .post(`/api/v1/generate-pdf`)
+      .send(body)
+      .expect(201)
+      .expect('Content-Type', 'application/pdf')
+      .expect('Content-Disposition', 'attachment; filename=report.pdf');
+
+    expect(response.body).toBeDefined();
   });
 });

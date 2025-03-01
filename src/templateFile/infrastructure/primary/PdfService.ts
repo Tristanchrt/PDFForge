@@ -15,8 +15,9 @@ export class PdfService {
     const page = await browser.newPage();
     await page.setContent(filledTemplate);
 
+    const A4 = 'A4';
     const pdfUint8Array = await page.pdf({
-      format: options.format || 'A4',
+      format: options.format || A4,
       margin: options.margin,
     });
     const pdfBuffer = Buffer.from(pdfUint8Array);
