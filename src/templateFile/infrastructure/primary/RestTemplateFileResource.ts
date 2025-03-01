@@ -9,7 +9,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ApiProduces, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { PdfService } from './PdfService';
+import { PdfService } from '../../application/PdfService';
 import { RestPdfToGenerate } from './RestPdfToGenerate';
 import { Readable } from 'node:stream';
 
@@ -44,7 +44,7 @@ export class RestTemplateFileResource {
     const pdfBuffer: Buffer = await this.pdfService.generatePdf(
       restPdfToCreate.template,
       restPdfToCreate.variables,
-      restPdfToCreate.options,
+      restPdfToCreate.options.toDomain(),
     );
 
     const title = restPdfToCreate.options.title || 'report';

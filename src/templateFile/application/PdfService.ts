@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import * as puppeteer from 'puppeteer';
 import * as mustache from 'mustache';
+import { PdfOptions } from '../domain/PdfOptions/PdfOptions';
+import { PaperFormat } from 'puppeteer';
 
 @Injectable()
 export class PdfService {
   async generatePdf(
     template: string,
     variables: object,
-    options: any,
+    options: PdfOptions,
   ): Promise<Buffer> {
     const filledTemplate = mustache.render(template, variables);
 
@@ -17,7 +19,7 @@ export class PdfService {
 
     const A4 = 'A4';
     const pdfUint8Array = await page.pdf({
-      format: options.format || A4,
+      format: (options.format as PaperFormat) || A4,
       margin: options.margin,
     });
     const pdfBuffer = Buffer.from(pdfUint8Array);

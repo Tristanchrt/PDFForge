@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { RestTemplateFileResource } from './RestTemplateFileResource';
-import { PdfService } from './PdfService';
+import { PdfService } from '../../application/PdfService';
 
 @Module({
   providers: [PdfService],
