@@ -24,10 +24,7 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install dependencies
-        run:
-            ls -la
-            pnpm install
-
+        run: ls -la
 
       - name: Build application
         run: pnpm build
