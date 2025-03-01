@@ -18,7 +18,7 @@ Make sure you have Node.js and NestJS installed.
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/pdfforge-api.git
+git clone https://github.com/Tristanchrt/PDFForge
 cd pdfforge-api
 ```
 
