@@ -1,4 +1,5 @@
-const checkIsNaN = <Value>(value: Value) => typeof value === 'number' && isNaN(value);
+const checkIsNaN = <Value>(value: Value) =>
+  typeof value === 'number' && isNaN(value);
 
 export abstract class Optional<Value> {
   public static empty<Value>(): Optional<Value> {
@@ -17,7 +18,9 @@ export abstract class Optional<Value> {
   }
 
   abstract map<Output>(mapper: (value: Value) => Output): Optional<Output>;
-  abstract flatMap<Output>(mapper: (feature: Value) => Optional<Output>): Optional<Output>;
+  abstract flatMap<Output>(
+    mapper: (feature: Value) => Optional<Output>,
+  ): Optional<Output>;
   abstract or(factory: () => Optional<Value>): Optional<Value>;
   abstract orElse(value: Value): Value;
   abstract orElseGet(factory: () => Value): Value;
@@ -88,7 +91,9 @@ class ValuatedOptional<Value> extends Optional<Value> {
     return Optional.of(mapper(this.value));
   }
 
-  flatMap<Output>(mapper: (feature: Value) => Optional<Output>): Optional<Output> {
+  flatMap<Output>(
+    mapper: (feature: Value) => Optional<Output>,
+  ): Optional<Output> {
     return mapper(this.value);
   }
 

@@ -30,8 +30,8 @@ jobs:
       - name: Test
         run: pnpm run test
 
-      - name: Test End-to-End
-        run: pnpm run test:e2e
+      - name: Test Coverage
+        run: pnpm run test:coverage
 
       - name: Lint
         run: pnpm run lint
